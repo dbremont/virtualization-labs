@@ -4,6 +4,32 @@
 
 ## Model
 
+> ...
+
+### Spec
+
+- 16 bit virtual machine
+- 65536 bytes (65 KB) bytes of addressable memory
+- Serial COM Port
+- Floppy Drive
+
+```c
+    // int8 *code;
+    // int8 *stack;
+    // int8 *heap;
+    // int8 *globals;
+    // int8 *constants;
+    // int8 *strings;
+    // int8 *symbols;
+    // int8 *functions;
+    // int8 *modules;
+    // int8 *exceptions;
+    // int8 *threads;
+    // int8 *processes;
+    // int8 *events;
+    // int8 *timers;
+```
+
 ### Components
 
 - **CPU**: Virtual processor executing instructions.
@@ -41,6 +67,15 @@
 | +---------+   +-----------------------------+   |
 +--------------------------------------------------+
 ```
+
+### Register Model
+
+- AX
+- BX
+- CX
+- DX
+- SP
+- IP
 
 ## References
 

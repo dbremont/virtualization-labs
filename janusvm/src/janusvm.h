@@ -1,4 +1,3 @@
-#define _GNU_SOURCE
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -6,18 +5,33 @@
 #include <stdbool.h>
 #include <assert.h>
 #include <errno.h>
-#include "janusvmutil.h"
+#include <stdio.h>
+#include <stdint.h>
 
-typedef unsigned char int8;
-typedef unsigned char int16;
-typedef unsigned char int32;
-typedef unsigned char int64;
+#define MEM_SIZE 256
+#define REG_COUNT 4
 
-#define $1 (int8 *)
-#define $2 (int16)
-#define $4 (int32)
-#define $8 (int64)
-#define $c (char *)
-#define $i (int)
+// Opcodes
+typedef enum {
+    MOV_REG_IMM, // Move immediate to register
+    MOV_REG_REG, // Move register to register
+    MOV_REG_MEM, // Move memory to register
+    MOV_MEM_REG, // Move register to memory
+    ADD,         // Add two registers
+    SUB,         // Subtract two registers
+    PRINT,       // Print register value
+    HALT         // Stop execution
+} Opcode;
 
-int main(int, char**);
+typedef struct  VM{
+    uint8_t memory[MEM_SIZE];
+    int registers[REG_COUNT];
+    uint8_t code[MEM_SIZE];
+
+    int ip; // Instruction pointer
+
+    void (*run)(struct VM *);
+} VM;
+
+void run(VM *vm);
+void init_vm(VM *vm);
